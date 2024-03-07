@@ -1,0 +1,128 @@
+::ng-deep .ant-card-head {
+  background: #f0e8f7;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+  color: #666666;
+}
+
+.window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+
+  .laststatus {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+
+    nz-card {
+      margin-bottom: 20px;
+      width: 100%;
+      min-height: 722px;
+    }
+
+    .submitid {
+      width: 8%;
+      text-align: center;
+    }
+
+    .userid {
+      width: 8%;
+      text-align: center;
+    }
+
+    .nick {
+      width: 8%;
+      text-align: center;
+    }
+
+    .problemid {
+      width: 6%;
+      text-align: center;
+    }
+
+    .status {
+      text-align: center;
+    }
+
+    .memory {
+      width: 5%;
+      text-align: center;
+    }
+
+    .time {
+      width: 5%;
+      text-align: center;
+    }
+
+    .language {
+      width: 8%;
+      text-align: center;
+    }
+
+    .codelength {
+      width: 8%;
+      text-align: center;
+    }
+
+    .submittime {
+      width: 15%;
+      text-align: center;
+    }
+  }
+
+  .submit {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+
+    button {
+      &.ant-btn {
+        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+        background: #cc99ff;
+        border: #cc99ff;
+      }
+    }
+
+    .ant-select {
+      margin-bottom: 10px;
+      width: 120px;
+    }
+  }
+}
+
+textarea {
+  border: 1px solid #ddd;
+  width: 50%;
+  height: 200px;
+
+  &:focus-visible {
+    border-color: #cc99ff;
+    box-shadow: 0 0 0 2px #ccccff;
+    outline: 0;
+  }
+}
+
+::ng-deep .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #cc99ff !important;
+}
+
+::ng-deep .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border-color: #cc99ff !important;
+  box-shadow: 0 0 0 2px #ccccff;
+}
+
+::ng-deep .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: #ccccff;
+}
+
+::ng-deep .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+  background: #cc00ff;
+}
+
+::ng-deep .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+  border-color: #cc00ff !important;
+}

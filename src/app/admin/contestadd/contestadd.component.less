@@ -1,0 +1,135 @@
+.window {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: white;
+
+  .register {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 200px;
+    width: 900px;
+
+    h1,
+    p {
+      font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+      color: #666666;
+      margin: 0;
+
+      span {
+        color: red;
+      }
+    }
+
+    .time {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      p {
+        margin-bottom: 10px;
+      }
+
+      nz-date-picker {
+        margin-bottom: 10px;
+        width: 25%;
+
+        &:focus,
+        &:hover {
+          border-color: #cc99ff;
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 2px #ccccff;
+        }
+      }
+    }
+
+    nz-transfer {
+      margin-bottom: 10px;
+    }
+
+    .in {
+      margin-bottom: 10px;
+      height: 40px;
+
+      &.ant-input {
+        &:focus,
+        &:hover {
+          border-color: #cc99ff;
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 2px #ccccff;
+        }
+      }
+    }
+
+    .quill {
+      margin-bottom: 10px;
+    }
+
+    .in-text {
+      margin-bottom: 10px;
+      height: 200px;
+
+      &.ant-input {
+        &:focus,
+        &:hover {
+          border-color: #cc99ff;
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 2px #ccccff;
+        }
+      }
+    }
+
+    .priv {
+      display: flex;
+      flex-direction: row;
+
+      .swi {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+
+        .w {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 40px;
+        }
+      }
+
+      .inp {
+        width: 300px;
+      }
+    }
+
+    button {
+      margin-right: 10px;
+      height: 100;
+
+      &.reg {
+        background: #cc99ff;
+        border: #cc99ff;
+        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+      }
+
+      &.res {
+        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+        color: #666666;
+
+        &:hover,
+        &:focus {
+          color: #cc99ff;
+          border-color: #cc99ff;
+        }
+      }
+    }
+  }
+}

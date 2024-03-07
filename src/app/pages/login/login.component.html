@@ -1,0 +1,18 @@
+<nz-layout class='window'>
+  <div class='login'>
+    <h1>登录</h1>
+    <input [(ngModel)]="user.user_id" class="in" nz-input placeholder="用户名">
+    <nz-input-group [nzSuffix]="suffixTemplate" class="in">
+      <input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="password" nz-input placeholder="密码">
+    </nz-input-group>
+    <button (click)="check()" class="log" nz-button nzSize="large" nzType="primary">
+      登录
+    </button>
+    <button class="reg" nz-button nzSize="large" nzType="default" routerLink="register">
+      注册
+    </button>
+    <ng-template #suffixTemplate>
+      <i [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible" nz-icon></i>
+    </ng-template>
+  </div>
+</nz-layout>

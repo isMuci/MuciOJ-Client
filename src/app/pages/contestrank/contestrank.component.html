@@ -1,0 +1,40 @@
+<div class="window">
+  <h1 [style]="'margin-bottom: 10px;'">比赛排行榜 -- {{getSubmits.contest_id}}</h1>
+  <nz-table #basicTable [nzData]="rank">
+    <thead>
+      <tr>
+        <th class="rank">名次</th>
+        <th class="user_id">用户</th>
+        <th class="nick">昵称</th>
+        <th class="ac">通过</th>
+        <th class="time">罚时</th>
+        <th class="prom" *ngFor="let data of num">{{data.value}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data let id=index">
+        <td class="rank" [style]="'font-size: 1.3em;'">#{{ id+1 }}</td>
+        <td class="user_id">{{ data.user_id }}</td>
+        <td class="nick">{{ data.nick }}</td>
+        <td class="ac">{{data.solve}}</td>
+        <td class="time">{{data.time}}</td>
+        <td class="prom" *ngFor="let sub of data.list">
+          <div *ngIf="sub.solve">
+            <div *ngIf="sub.cnt">
+              <p [style]="'color: #00cd00;margin-bottom: 0px;font-weight: 500;font-size: 1.5em;'">+{{sub.cnt}}</p>
+              <p [style]="'margin-bottom: 0px;'">{{sub.time}}</p>
+            </div>
+            <div *ngIf="!sub.cnt">
+              <i nz-icon nzType="check" nzTheme="outline" [style]="'color: #00cd00;font-size: 1.7em;'"></i>
+              <p [style]="'margin-bottom: 0px;'">{{sub.time}}</p>
+            </div>
+          </div>
+          <div *ngIf="!sub.solve">
+            <p *ngIf="sub.cnt" [style]="'color: #ff0000;margin-bottom: 0px;font-weight: 500;font-size: 1.5em;'">-{{sub.cnt}}</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+</div>

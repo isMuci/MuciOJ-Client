@@ -1,0 +1,25 @@
+<nz-layout class="window">
+  <div class="register">
+    <h1>修改用户信息</h1>
+    <p>用户名</p>
+    <input class="in" nz-input disabled="true" placeholder="{{user.user_id}}">
+    <p>昵称<span class="imp">*</span></p>
+    <input [(ngModel)]="user.nick" class="in" placeholder="请输入昵称" nz-input>
+    <p>密码<span class="imp">*</span></p>
+    <input [(ngModel)]="password" type="password" class="in" placeholder="请输入密码" nz-input>
+    <p>新密码<span class="imp">*</span></p>
+    <input [(ngModel)]="newPassword" type="password" class="in" placeholder="若无需修改，请勿填写此项" nz-input>
+    <p>确认新密码<span class="imp">*</span></p>
+    <input [(ngModel)]="repeatNewPassword" type="password" class="in" placeholder="若无需修改，请勿填写此项" nz-input>
+    <p>个性签名</p>
+    <input [(ngModel)]="user.signature" class="in" placeholder="请输入个性签名" nz-input>
+    <p>邮箱</p>
+    <input [(ngModel)]="user.email" class="in" placeholder="请输入邮箱" nz-input>
+    <p>学校</p>
+    <input [(ngModel)]="user.school" class="in" placeholder="请输入学校" nz-input>
+    <div class="but">
+      <button (click)="check()" class="reg" nz-button nzSize="large" nzType="primary">修改</button>
+      <button (click)="reset()" class="res" nz-button nzSize="large" nzType="default">重置</button>
+    </div>
+  </div>
+</nz-layout>

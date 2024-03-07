@@ -1,0 +1,48 @@
+<nz-layout class="window">
+  <div class="in">
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input type="text" nz-input placeholder="标题" (keypress)="($event.which===13)?searchByTitle():0"
+        [(ngModel)]="searchTitle" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input type="number" nz-input placeholder="题目编号" (keypress)="($event.which===13)?searchByID():0"
+        [(ngModel)]="searchID" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+  </div>
+  <nz-table #basicTable [nzData]="listOfData" nzPaginationPosition='both' [nzLoading]="isLoading" [nzPageSize]="50">
+    <thead>
+      <tr>
+        <th class="status">{{isLogin?'状态':''}}</th>
+        <th class="problemid">题目编号</th>
+        <th class="title">标题</th>
+        <th class="solved">解决</th>
+        <th class="submit">提交</th>
+        <th class="pass">通过率</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td class="status">
+          <i class="ac" nz-icon nzType="check" nzTheme="outline" *ngIf="isLogin&&data.status=='ac'"></i>
+          <i class="wa" nz-icon nzType="close" nzTheme="outline" *ngIf="isLogin&&data.status=='wa'"></i>
+        </td>
+        <td class="problemid">{{ data.problem_id }}</td>
+        <td>
+          <a routerLink="/problem" [queryParams]="{ problem_id: data.problem_id}">{{ data.title }}</a>
+        </td>
+        <td class="solved">
+          <a routerLink="/status" [queryParams]="{problem_id:data.problem_id,result:4}">{{ data.accepted }}</a>
+        </td>
+        <td class="submit"><a routerLink="/status" [queryParams]="{problem_id:data.problem_id}">{{ data.submit }}</a>
+        </td>
+        <td class="pass_li">{{ data.pass }}%</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-layout>

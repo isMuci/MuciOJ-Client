@@ -1,0 +1,101 @@
+.window {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  .chart {
+    width: 400px;
+    height: 776px;
+
+    nz-card {
+      width: 400px;
+      height: 776px;
+      margin-bottom: 0px;
+    }
+
+    .pie {
+      width: 350px;
+      height: 240px;
+    }
+  }
+
+  .list {
+    width: 100%;
+
+    .rank {
+      width: 8%;
+      text-align: center;
+    }
+
+    .submitid {
+      width: 11%;
+      text-align: center;
+    }
+
+    .userid {
+      width: 11%;
+      text-align: center;
+    }
+
+    .memory {
+      width: 12%;
+      text-align: center;
+    }
+
+    .time {
+      width: 12%;
+      text-align: center;
+    }
+
+    .language {
+      width: 10%;
+      text-align: center;
+    }
+
+    .codelength {
+      width: 16%;
+      text-align: center;
+    }
+
+    .submittime {
+      width: 20%;
+      text-align: center;
+    }
+
+    .ui {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+      .menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: 1px solid rgba(34, 36, 38, 0.15);
+        font-weight: 400;
+        background: #fff;
+        border-radius: 0.28571429rem;
+        min-height: 2.85714286em;
+        width: 150px;
+
+        a {
+          padding: 10px;
+          width: 50px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .ant-card-actions>li>span>.anticon:hover {
+  color: #cc99ff !important;
+}
+
+::ng-deep .ant-card-head {
+  background: #f0e8f7 !important;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif !important;
+  color: #666666 !important;
+}

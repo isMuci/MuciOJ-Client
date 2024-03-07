@@ -1,0 +1,32 @@
+<nz-layout class="window">
+  <nz-table #basicTable [nzData]="listOfData" nzPaginationPosition='both' [nzLoading]="isLoading" [nzPageSize]="50">
+    <thead>
+      <tr>
+        <th class="blank"></th>
+        <th class="rank">名次</th>
+        <th class="user">用户</th>
+        <th class="nick">昵称</th>
+        <th class="solved">解决</th>
+        <th class="submit">提交</th>
+        <th class="pass">通过率</th>
+        <th class="blank"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data let rank=index">
+        <td class="blank"></td>
+        <td class="rank">{{rank+1}}</td>
+        <td class="user"><a routerLink="/userinfo/{{data.user_id}}">{{data.user_id}}</a></td>
+        <td class="nick">{{data.nick}}</td>
+        <td class="solved">
+          <a routerLink="/status" [queryParams]="{user_id:data.user_id,result:4}">{{data.solved}}</a>
+        </td>
+        <td class="submit">
+          <a routerLink="/status" [queryParams]="{user_id:data.user_id}">{{data.submit}}</a>
+        </td>
+        <td class="pass">{{ data.pass }}%</td>
+        <td class="blank"></td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-layout>

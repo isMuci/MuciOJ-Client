@@ -1,0 +1,23 @@
+<nz-layout class="window">
+  <div class="register">
+    <h1>注册</h1>
+    <p>用户名<span class="imp">*</span></p>
+    <input [(ngModel)]="user.user_id" class="in" nz-input placeholder="a~z,A~Z,0~9,长度<15">
+    <p>昵称<span class="imp">*</span></p>
+    <input [(ngModel)]="user.nick" class="in" nz-input>
+    <p>密码<span class="imp">*</span></p>
+    <input [(ngModel)]="password" type="password" class="in" nz-input>
+    <p>确认密码<span class="imp">*</span></p>
+    <input [(ngModel)]="repeatPassword" type="password" class="in" nz-input>
+    <p>个性签名</p>
+    <input [(ngModel)]="user.signature" class="in" nz-input>
+    <p>邮箱</p>
+    <input [(ngModel)]="user.email" class="in" nz-input>
+    <p>学校</p>
+    <input [(ngModel)]="user.school" class="in" nz-input>
+    <div class="but">
+      <button (click)="check()" class="reg" nz-button nzSize="large" nzType="primary">注册</button>
+      <button (click)="reset()" class="res" nz-button nzSize="large" nzType="default">重置</button>
+    </div>
+  </div>
+</nz-layout>

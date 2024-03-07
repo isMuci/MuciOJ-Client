@@ -1,0 +1,100 @@
+.window {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: white;
+
+  .ranklist {
+    width: 34%;
+    background-color: white;
+
+    nz-card {
+      margin-right: 10px;
+
+      .rank,
+      .user,
+      .sign {
+        text-align: center;
+      }
+
+      .rank {
+        width: 15%;
+      }
+
+      .user {
+        width: 35%;
+      }
+
+      .sign {
+        width: 50%;
+      }
+    }
+  }
+
+  .problemset {
+    width: 33%;
+    background-color: white;
+    min-width: 250px;
+
+    nz-card {
+      margin-right: 10px;
+
+      .title {
+        width: 70%;
+        text-align: center;
+      }
+
+      .time {
+        width: 30%;
+        text-align: center;
+      }
+    }
+  }
+
+  .contestset {
+    width: 33%;
+    background-color: white;
+    min-width: 250px;
+
+    nz-card {
+      // margin-right: 10px;
+
+      .title {
+        width: 60%;
+        text-align: center;
+      }
+
+      .time {
+        width: 40%;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width:1300px) {
+
+  .window {
+
+    .ranklist,
+    .problemset,
+    .contestset {
+      width: 100%;
+
+    }
+
+    .ranklist,
+    .problemset {
+      nz-card {
+        margin-right: 0px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+::ng-deep .ant-card-head {
+  background: #f0e8f7;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+  color: #666666;
+}

@@ -1,0 +1,125 @@
+.window {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: white;
+
+  .register {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 200px;
+    width: 900px;
+
+    h1,
+    h2,
+    p {
+      font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+      color: #666666;
+      margin: 0;
+
+      span {
+        color: red;
+      }
+    }
+
+    .tam {
+      display: flex;
+      flex-direction: row;
+
+      .all {
+        margin-bottom: 10px;
+
+        .all-t {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          .all-in {
+            width: 70%;
+            height: 40px;
+
+            &.ant-input {
+              margin-right: 10px;
+
+              &:focus,
+              &:hover {
+                border-color: #cc99ff;
+              }
+
+              &:focus {
+                box-shadow: 0 0 0 2px #ccccff;
+              }
+            }
+
+          }
+        }
+      }
+    }
+
+    .in {
+      margin-bottom: 10px;
+      height: 40px;
+
+      &.ant-input {
+
+        &:focus,
+        &:hover {
+          border-color: #cc99ff;
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 2px #ccccff;
+        }
+      }
+    }
+
+    .quill {
+      margin-bottom: 10px;
+    }
+
+    .in-text {
+      margin-bottom: 10px;
+      height: 200px;
+
+      &.ant-input {
+
+        &:focus,
+        &:hover {
+          border-color: #cc99ff;
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 2px #ccccff;
+        }
+      }
+    }
+
+    .check {
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-right: 10px;
+      height: 100;
+
+      &.reg {
+        background: #cc99ff;
+        border: #cc99ff;
+        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+      }
+
+      &.res {
+        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+        color: #666666;
+
+        &:hover,
+        &:focus {
+          color: #cc99ff;
+          border-color: #cc99ff;
+        }
+      }
+    }
+  }
+}

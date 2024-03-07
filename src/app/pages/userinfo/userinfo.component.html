@@ -1,0 +1,106 @@
+<nz-layout class="window">
+  <!-- 电脑端 -->
+  <div *ngIf="!isMobile" class="window">
+    <div class="card">
+      <nz-card [nzCover]="coverTemplate" [nzActions]="[userid,mail,actionEdit, actionEllipsis]">
+        <nz-card-meta nzTitle="{{user.user_id}}" nzDescription="{{user.school||'这人没有填写学校'}}"></nz-card-meta>
+      </nz-card>
+      <ng-template #coverTemplate>
+        <img alt="example" src="https://q1.qlogo.cn/g?b=qq&nk={{qq}}&s=5">
+      </ng-template>
+      <ng-template #userid>
+        <i nz-icon nz-popover nzPopoverTitle="用户名" nzPopoverContent="{{user.user_id}}" nzPopoverPlacement="bottom"
+          nzType="user" nzTheme="outline"></i>
+      </ng-template>
+      <ng-template #mail>
+        <i nz-icon nz-popover nzPopoverTitle="邮箱" nzPopoverContent="{{user.email||'这人没有填写邮箱'}}"
+          nzPopoverPlacement="bottom" nzType="mail" nzTheme="outline"></i>
+      </ng-template>
+      <ng-template #actionEdit>
+        <i nz-icon nz-popover nzPopoverTitle="通过题目" nzPopoverContent="{{user.solved}}题" nzPopoverPlacement="bottom"
+          nzType="check" nzTheme="outline"></i>
+      </ng-template>
+      <ng-template #actionEllipsis>
+        <i nz-icon nz-popover nzPopoverTitle="排名" nzPopoverContent="No.{{user.rank}}" nzPopoverPlacement="bottom"
+          nzType="line-chart" nzTheme="outline"></i>
+      </ng-template>
+    </div>
+    <div class="info">
+      <div [ngStyle]="{ width: '323px', hight:'323px',border: '1px solid #d9d9d9', borderRadius: '4px' }">
+        <nz-calendar [nzFullscreen]="false" [(nzMode)]="calendarMode" (nzSelectChange)="onValueChange($event)"
+          (nzPanelChange)="onPanelChange($event)"></nz-calendar>
+        <nz-modal [(nzVisible)]="isVisible" [nzTitle]="user.date" [nzFooter]="null" (nzOnCancel)="handleCancel()">
+          <ng-container *nzModalContent class="solution">
+            <nz-empty *ngIf="isEmpty" nzNotFoundImage="simple"></nz-empty>
+            <div *ngIf="!isEmpty">
+              <nz-tag *ngFor="let id of problemId let i =index" [nzColor]="color[i%11]"
+                routerLink="problem/{{id.problem_id}}">{{id.problem_id}}</nz-tag>
+            </div>
+          </ng-container>
+        </nz-modal>
+      </div>
+      <nz-card nzTitle="个性签名">
+        <nz-card-meta nzDescription="{{user.signature||'这人没有填写签名'}}"></nz-card-meta>
+      </nz-card>
+    </div>
+    <div class="chart">
+      <nz-card nzTitle="统计" [nzBodyStyle]="{padding: 0}">
+        <div class="pie" id="container"></div>
+      </nz-card>
+    </div>
+  </div>
+
+  <!-- 手机端 -->
+  <div *ngIf="isMobile" class="mobile">
+    <div class="card">
+      <nz-card [nzCover]="coverTemplate" [nzActions]="[userid,mail,actionEdit, actionEllipsis]">
+        <nz-card-meta nzTitle="{{user.user_id}}" nzDescription="{{user.school||'这人没有填写学校'}}"></nz-card-meta>
+      </nz-card>
+      <ng-template #coverTemplate>
+        <img alt="example" src="https://q1.qlogo.cn/g?b=qq&nk={{qq}}&s=5">
+      </ng-template>
+      <ng-template #userid>
+        <i nz-icon nz-popover nzPopoverTitle="用户名" nzPopoverContent="{{user.user_id}}" nzPopoverPlacement="bottom"
+          nzType="user" nzTheme="outline"></i>
+      </ng-template>
+      <ng-template #mail>
+        <i nz-icon nz-popover nzPopoverTitle="邮箱" nzPopoverContent="{{user.email||'这人没有填写邮箱'}}"
+          nzPopoverPlacement="bottom" nzType="mail" nzTheme="outline"></i>
+      </ng-template>
+      <ng-template #actionEdit>
+        <i nz-icon nz-popover nzPopoverTitle="通过题目" nzPopoverContent="{{user.solved}}题" nzPopoverPlacement="bottom"
+          nzType="check" nzTheme="outline"></i>
+      </ng-template>
+      <ng-template #actionEllipsis>
+        <i nz-icon nz-popover nzPopoverTitle="排名" nzPopoverContent="No.{{user.rank}}" nzPopoverPlacement="bottom"
+          nzType="line-chart" nzTheme="outline"></i>
+      </ng-template>
+    </div>
+
+    <div class="sig">
+      <nz-card nzTitle="个性签名">
+        <nz-card-meta nzDescription="{{user.signature||'这人没有填写签名'}}"></nz-card-meta>
+      </nz-card>
+    </div>
+    <div class="info">
+      <div [ngStyle]="{ width: '323px', hight:'323px',border: '1px solid #d9d9d9', borderRadius: '4px' }">
+        <nz-calendar [nzFullscreen]="false" [(nzMode)]="calendarMode" (nzSelectChange)="onValueChange($event)"
+          (nzPanelChange)="onPanelChange($event)"></nz-calendar>
+        <nz-modal [(nzVisible)]="isVisible" [nzTitle]="user.date" [nzFooter]="null" (nzOnCancel)="handleCancel()">
+          <ng-container *nzModalContent class="solution">
+            <nz-empty *ngIf="isEmpty" nzNotFoundImage="simple"></nz-empty>
+            <div *ngIf="!isEmpty">
+              <nz-tag *ngFor="let id of problemId let i =index" [nzColor]="color[i%11]"
+                routerLink="problem/{{id.problem_id}}">{{id.problem_id}}</nz-tag>
+            </div>
+          </ng-container>
+        </nz-modal>
+      </div>
+    </div>
+    <div class="chart">
+      <nz-card nzTitle="统计" [nzBodyStyle]="{padding: 0}">
+        <div class="pie" id="container"></div>
+      </nz-card>
+    </div>
+  </div>
+</nz-layout>

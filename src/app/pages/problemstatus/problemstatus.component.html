@@ -1,0 +1,76 @@
+<div class="window">
+  <div class="chart">
+    <nz-card nzTitle="统计">
+      <div class="word">
+        <nz-descriptions [nzColumn]=1 nzSize="small" nzBordered>
+          <nz-descriptions-item nzTitle="提交">{{submit}}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="用户(提交)">{{users}}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="用户(解决)">{{acusers}}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="答案正确"><a routerLink="/status"
+              [queryParams]="{problem_id:search.problem_id,result:4}">{{data[0].value}}</a>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="格式错误"><a routerLink="/status"
+              [queryParams]="{problem_id:search.problem_id,result:5}">{{data[1].value}}</a>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="答案错误"><a routerLink="/status"
+              [queryParams]="{problem_id:search.problem_id,result:6}">{{data[2].value}}</a>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="时间超限"><a routerLink="/status"
+              [queryParams]="{problem_id:search.problem_id,result:7}">{{data[3].value}}</a>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="内存超限"><a routerLink="/status"
+              [queryParams]="{problem_id:search.problem_id,result:8}">{{data[4].value}}</a>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="输出超限"><a routerLink="/status"
+              [queryParams]="{problem_id:search.problem_id,result:9}">{{data[5].value}}</a>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="运行错误"><a routerLink="/status"
+              [queryParams]="{problem_id:search.problem_id,result:10}">{{data[6].value}}</a>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="编译错误"><a routerLink="/status"
+              [queryParams]="{problem_id:search.problem_id,result:11}">{{data[7].value}}</a>
+          </nz-descriptions-item>
+        </nz-descriptions>
+      </div>
+      <div class="pie" id="container"></div>
+    </nz-card>
+  </div>
+  <div class="list">
+    <nz-table #basicTable [nzData]="listOfData" nzShowPagination=false [nzLoading]="isLoading" [nzPageSize]="50">
+      <thead>
+        <tr>
+          <th class="rank">名次</th>
+          <th class="submitid">提交编号</th>
+          <th class="userid">用户</th>
+          <th class="memory">内存</th>
+          <th class="time">耗时</th>
+          <th class="language">语言</th>
+          <th class="codelength">代码长度</th>
+          <th class="submittime">提交时间</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data let key=index">
+          <td class="rank">{{key+1+search.page*10}}</td>
+          <td class="submitid">{{data.solution_id}}</td>
+          <td class="userid">
+            <a routerLink="/userinfo/{{data.user_id}}">{{data.user_id}}</a> (<a routerLink="/status"
+              [queryParams]="{problem_id:search.problem_id,user_id:data.user_id,result:4}">{{data.att}}</a>)
+          </td>
+          <td class="memory">{{data.memory}}KB</td>
+          <td class="time">{{data.time}}ms</td>
+          <td class="language">{{language[data.language]}}</td>
+          <td class="codelength">{{data.code_length}}bytes</td>
+          <td class="submittime">{{datePipe.transform(data.in_date, 'yyyy-mm-dd hh:mm:ss')?.toString()}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <div class="ui">
+      <div class="menu">
+        <a (click)="search.page=0;searchStatus()">Top</a>
+        <a (click)="search.page-1>=0?search.page=search.page-1:0;searchStatus()">Prev</a>
+        <a (click)="search.page=search.page+1;searchStatus()">Next</a>
+      </div>
+    </div>
+  </div>
+</div>

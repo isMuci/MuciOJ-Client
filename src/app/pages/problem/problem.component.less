@@ -1,0 +1,59 @@
+.window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+
+    div {
+      margin-bottom: 5px;
+    }
+  }
+
+  .problem {
+    width: 90%;
+
+    .op {
+      margin-bottom: 20px;
+      text-align: end;
+
+      button {
+        margin-left: 10px;
+
+        &.ant-btn {
+          font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+
+          &:nth-child(1) {
+            background: #cc99ff;
+            border: #cc99ff;
+          }
+
+          &:nth-child(2),
+          &:nth-child(3) {
+            color: #666666;
+
+            &:hover,
+            &:focus {
+              color: #cc99ff;
+              border-color: #cc99ff;
+            }
+          }
+        }
+      }
+    }
+
+    nz-card {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+::ng-deep .ant-card-head {
+  background: #f0e8f7 !important;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif !important;
+  color: #666666 !important;
+}

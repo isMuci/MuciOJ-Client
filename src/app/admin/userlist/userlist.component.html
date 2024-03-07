@@ -1,0 +1,79 @@
+<nz-layout class="window">
+  <div class="in">
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input type="text" nz-input placeholder="用户名/昵称/邮箱/学校" (keypress)="($event.which===13)?searchUsers():0"
+        [(ngModel)]="search" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+    <button nz-button nzType="primary" nzShape="round" (click)="showFormModal()">
+      <i nz-icon nzType="user-add" nzTheme="outline"></i>添加用户
+    </button>
+  </div>
+  <nz-table #basicTable [nzData]="listOfData" nzPaginationPosition='both' [nzLoading]="isLoading" [nzPageSize]="50">
+    <thead>
+      <tr>
+        <th class="userid">用户名</th>
+        <th class="nick">昵称</th>
+        <th class="email">邮箱</th>
+        <th class="school">学校</th>
+        <th class="lastlogin">上次登录</th>
+        <th class="registertime">注册时间</th>
+        <th class="defunct">启用/屏蔽</th>
+        <th class="resetpwd">密码重置</th>
+        <th class="privilege">管理员权限</th>
+        <th class="delete">删除</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data let i=index">
+        <td class="userid">
+          <a routerLink="/userinfo/{{data.user_id}}">{{ data.user_id }}</a></td>
+        <td class="nick">{{ data.nick }}</td>
+        <td class="email">{{ data.email }}</td>
+        <td class="school">{{ data.school }}</td>
+        <td class="lastlogin">{{ data.accesstime }}</td>
+        <td class="registertime">{{ data.reg_time }}</td>
+        <td class="defunct">
+          <nz-switch [ngModel]="data.defunct=='N'" [nzLoading]="data.loadingd" (click)="setDefunct(i)"></nz-switch>
+        </td>
+        <td class="resetpwd">
+          <button nz-button nzType="primary" nzShape="circle" nzGhost (click)="showConfModal(i)">
+            <i nz-icon nzType="edit" nzTheme="outline"></i>
+          </button>
+        </td>
+        <td class="privilege">
+          <nz-switch [ngModel]="data.privilege=='admin'" [nzLoading]="data.loadingp" (click)="setPrivilege(i)"></nz-switch>
+        </td>
+        <td class="delete">
+          <button nz-button nzType="primary" nzShape="circle" nzDanger (click)="showDeleteConfirm(data.user_id)">
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <nz-modal [(nzVisible)]="confVisible" nzTitle="重置用户密码" (nzOnCancel)="handleConfCancel()" (nzOnOk)="handleConfOk()"
+    [nzOkLoading]="confLoading">
+    <div *nzModalContent class="modal">
+      <input type="text" nz-input placeholder="新密码"
+        [(ngModel)]="newPassword" />
+
+      <input type="text" nz-input placeholder="确认新密码"
+        [(ngModel)]="repeatNewPassword" />
+    </div>
+  </nz-modal>
+
+  <nz-modal [(nzVisible)]="formVisible" nzTitle="添加新用户" (nzOnCancel)="handleFormCancel()" (nzOnOk)="handleFormOk()"
+    [nzOkLoading]="formLoading">
+    <div *nzModalContent class="modal">
+      <input type="text" nz-input placeholder="用户名"
+        [(ngModel)]="addUserInfo.user_id" />
+      <input type="text" nz-input placeholder="密码"
+        [(ngModel)]="password" />
+      <input type="text" nz-input placeholder="确认密码"
+        [(ngModel)]="repeatPassword" />
+    </div>
+  </nz-modal>
+</nz-layout>

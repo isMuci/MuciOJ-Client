@@ -1,0 +1,92 @@
+.window {
+  background: white;
+
+  text-align: center;
+
+  h1,
+  p {
+    font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+    color: #666666;
+    margin: 0;
+
+    span {
+      color: red;
+    }
+  }
+
+  .rank,
+  .user_id,
+  .nick,
+  .ac,
+  .time,
+  .prom {
+    text-align: center;
+  }
+
+  .rank {
+    width: 60px;
+  }
+
+  .user_id {
+    width: 100px;
+  }
+
+  .nick {
+    width: 150px;
+  }
+
+  .ac {
+    width: 60px;
+  }
+
+  .time {
+    width: 100px;
+  }
+
+}
+
+::ng-deep .ant-pagination-item-active {
+  border-color: #cc00ff !important;
+
+  a {
+    color: #cc00ff;
+
+    &:hover {
+      color: #cc00ff;
+    }
+  }
+}
+
+::ng-deep .ant-pagination-item:hover {
+  border-color: #cc99ff !important;
+
+  a {
+    color: #cc99ff;
+
+    &:hover {
+      color: #cc99ff;
+    }
+  }
+}
+
+::ng-deep .ant-pagination-prev:hover .ant-pagination-item-link {
+  border-color: #cc99ff !important;
+  color: #cc99ff;
+}
+
+::ng-deep .ant-pagination-next:hover .ant-pagination-item-link {
+  border-color: #cc99ff !important;
+  color: #cc99ff;
+}
+
+::ng-deep .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon {
+  color: #cc99ff;
+}
+
+::ng-deep .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
+  color: #cc99ff;
+}
+
+::ng-deep .ant-table-pagination-right {
+  justify-content: center;
+}

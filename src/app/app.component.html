@@ -1,0 +1,146 @@
+<nz-layout class="app-layout">
+  <nz-sider *ngIf="privilege=='admin'" [(nzCollapsed)]="isCollapsed" class="menu-sidebar"
+    (nzCollapsedChange)="changeWindow($event)" nzCollapsible nzWidth="256px" nzBreakpoint="md">
+    <div class="sidebar-logo">
+      <a routerLink="/welcome" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
+        <h1>MuciOj for Admin</h1>
+      </a>
+    </div>
+    <ul [nzInlineCollapsed]="isCollapsed" nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-submenu nzOpen nzTitle="控制面板" nzIcon="dashboard">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/userlist">用户管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/problemlist">题目管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/contestlist">比赛管理</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="关于作者" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a>赞助作者</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout [style]="'margin-left: '+winLeft+'px;'">
+    <nz-header>
+      <div class="app-header">
+        <!-- 电脑端 -->
+        <div class="comp" nz-row>
+          <div [nzSpan]="2" [nzPush]="1" class="header-name" nz-col>
+            <button nz-button nzType="text" routerLink="home">MuciOj</button>
+          </div>
+          <ul [nzSpan]="5" [nzPush]="1" class="header-menu" nz-col nz-menu nzMode="horizontal">
+            <li nz-menu-item nzMatchRouter routerLink="home">首页</li>
+            <li nz-menu-item nzMatchRouter routerLink="problemset">题单</li>
+            <li nz-menu-item nzMatchRouter routerLink="contestset">竞赛</li>
+            <li nz-menu-item nzMatchRouter routerLink="status">状态</li>
+            <li nz-menu-item nzMatchRouter routerLink="ranklist">排行</li>
+          </ul>
+          <div *ngIf="!isLogin" [nzSpan]="3" [nzPush]="13" class="header-logreg" nz-col nzSize="large">
+            <button nz-button nzSize="large" nzType="primary" routerLink="login">
+              登录
+            </button>
+            <button nz-button nzSize="large" nzType="default" routerLink="register">
+              注册
+            </button>
+          </div>
+          <div *ngIf="isLogin" [nzSpan]="3" [nzPush]="13" class="header-user" nz-col nzSize="large">
+            <button [nzDropdownMenu]="menu" nz-button nz-dropdown routerLink="userinfo/{{ user_id }}" nzType="text">
+              {{ nick }}
+              <i nz-icon nzType="down"></i>
+            </button>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item routerLink="setinfo">
+                  <i nz-icon nzType="edit" nzTheme="outline"></i>
+                  <a>设置用户信息</a>
+                </li>
+                <li (click)="logOut()" nz-menu-item>
+                  <i nz-icon nzType="logout" nzTheme="outline"></i>
+                  <a>退出登录</a>
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+          </div>
+        </div>
+
+        <!-- 手机端 -->
+        <div class="mob" nz-row>
+          <div [nzSpan]="6" [nzPush]="1" class="header-name" nz-col>
+            <button nz-button nzType="text" routerLink="home">MuciOj</button>
+          </div>
+          <div [nzSpan]="5" [nzPush]="12" class="header-user-mob" nz-col>
+            <div (click)="open()" class="log">
+              <i class="menu">
+                <span></span>
+                <span></span>
+                <span></span>
+              </i>
+              <nz-drawer [nzVisible]="visible" (nzOnClose)="close()" nzClosable="false" nzPlacement="right"
+                nzTitle="MuciOj">
+                <ng-container *nzDrawerContent>
+                  <ul nz-menu class="header-menu-mobile">
+                    <li nz-menu-item nzMatchRouter routerLink="home">首页</li>
+                    <li nz-menu-item nzMatchRouter routerLink="problemset">题单</li>
+                    <li nz-menu-item nzMatchRouter routerLink="contestset">竞赛</li>
+                    <li nz-menu-item nzMatchRouter routerLink="status">状态</li>
+                    <li nz-menu-item nzMatchRouter routerLink="ranklist">排行</li>
+                  </ul>
+                </ng-container>
+              </nz-drawer>
+            </div>
+            <div *ngIf="isLogin" [nzDropdownMenu]="menu" class="log" nz-dropdown nzTrigger="click">
+              <nz-avatar [nzText]="nick[0]" style="background-color: #cc99ff"></nz-avatar>
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu>
+                  <li nz-menu-item routerLink="userinfo/{{ user_id }}">
+                    <i nz-icon nzType="user" nzTheme="outline"></i>
+                    <a>{{ user_id }}</a>
+                  </li>
+                  <li nz-menu-item routerLink="setinfo">
+                    <i nz-icon nzType="edit" nzTheme="outline"></i>
+                    <a>设置用户信息</a>
+                  </li>
+                  <li (click)="logOut()" nz-menu-item>
+                    <i nz-icon nzType="logout" nzTheme="outline"></i>
+                    <a>退出登录</a>
+                  </li>
+                </ul>
+              </nz-dropdown-menu>
+            </div>
+            <div *ngIf="!isLogin" [nzDropdownMenu]="menu" class="log" nz-dropdown nzTrigger="click">
+              <nz-avatar nzIcon="user" style="background-color: #ccccff"></nz-avatar>
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu>
+                  <li nz-menu-item routerLink="login">
+                    <i nz-icon nzType="login" nzTheme="outline"></i>
+                    <a>登录</a>
+                  </li>
+                  <li nz-menu-item routerLink="register">
+                    <i nz-icon nzType="form" nzTheme="outline"></i>
+                    <a>注册</a>
+                  </li>
+                </ul>
+              </nz-dropdown-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nz-header>
+
+    <nz-content class="content">
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

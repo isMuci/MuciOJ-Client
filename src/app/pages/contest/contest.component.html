@@ -1,0 +1,88 @@
+<nz-layout class="window">
+  <div class="progress">
+    <h1>Contest {{contest.contest_id}} - {{contest.title}}</h1>
+    <div class="time">
+      <div class="s">
+        <div class="tip">{{ datePipe.transform(contest.start_time, "yyyy-MM-dd HH:mm:ss" ) ?.toString() }}</div>
+      </div>
+      <div class="e">
+        <div class="tip">{{ datePipe.transform(contest.end_time, "yyyy-MM-dd HH:mm:ss" ) ?.toString() }}</div>
+      </div>
+    </div>
+    <div class="bar">
+      <nz-progress [nzShowInfo]="false" [nzPercent]="progerssPrecent"
+        [nzStrokeColor]="{ '0%': '#ccffff', '100%': '#cc00ff' }" nzStatus="active">
+      </nz-progress>
+    </div>
+    <div class="op">
+      <div class="s">
+        <button nz-button nzType="primary" routerLink="/contestrank"
+          [queryParams]="{contest_id:contest.contest_id}">排行榜</button>
+        <button *ngIf="problemVisable" nz-button nzType="default" routerLink="/status"
+          [queryParams]="{contest_id: getContest.contest_id, password: getContest.password}">提交记录</button>
+      </div>
+      <div class="e">
+        <div class="tip"
+          [style]="'color: #000000; width: 6em; background-color:'+(contest.isEnd ? '#cfcfcf;': contest.isStart ? '#00cc99;': '#ff6666;')">
+          {{contest.isEnd ? "已结束" : contest.isStart? "进行中" : "未开始"}}
+        </div>
+        <div class="tip"
+          [style]="'color: #f5f5f5; width: 5em; background-color:'+(contest.private ? '#ff33ff;' : '#00cc00;')">
+          {{contest.private?"私有":"公开"}}</div>
+        <div class="tip">{{ datePipe.transform(nowTime, "yyyy-MM-dd HH:mm:ss" ) ?.toString() }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="bord">
+    <nz-card nzTitle="公告">
+      <div [innerHTML]="contest.description"></div>
+    </nz-card>
+  </div>
+  <nz-result class="result" *ngIf="resultVisable" [nzIcon]="resultStatus?'lock':'alert'"
+    nzTitle="{{resultStatus?'请输入比赛密码':'比赛尚未开始'}}">
+    <div nz-result-extra *ngIf="resultStatus">
+      <nz-input-group [nzSuffix]="suffixTemplate" class="in">
+        <input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="password" nz-input placeholder="密码">
+      </nz-input-group>
+      <button (click)="getPrivateProblem()" class="log" nz-button nzSize="large" nzType="primary">提交</button>
+      <ng-template #suffixTemplate>
+        <i [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"
+          nz-icon></i>
+      </ng-template>
+    </div>
+  </nz-result>
+  <div *ngIf="problemVisable">
+    <nz-table #basicTable [nzData]="listOfData" [nzLoading]="isLoading" [nzPageSize]="50">
+      <thead>
+        <tr>
+          <th class="status">{{ isLogin ? "状态" : "" }}</th>
+          <th class="problemid">题目编号</th>
+          <th class="title">标题</th>
+          <th class="solved">解决</th>
+          <th class="submit">提交</th>
+          <th class="pass">通过率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td class="status">
+            <i *ngIf="isLogin && data.status == 'ac'" class="ac" nz-icon nzType="check" nzTheme="outline"></i>
+            <i *ngIf="isLogin && data.status == 'wa'" class="wa" nz-icon nzType="close" nzTheme="outline"></i>
+          </td>
+          <td class="problemid">{{ data.ID }}</td>
+          <td>
+            <a routerLink="/problem"
+              [queryParams]="{ problem_id: data.problem_id, contest_id: getContest.contest_id, password: getContest.password , ID:data.ID}">{{ data.title }}</a>
+          </td>
+          <td class="solved">
+            <a [queryParams]="{ problem_id: data.problem_id, result: 4 }" routerLink="/status">{{ data.c_accepted }}</a>
+          </td>
+          <td class="submit">
+            <a [queryParams]="{ problem_id: data.problem_id }" routerLink="/status">{{ data.c_submit }}</a>
+          </td>
+          <td class="pass_li">{{ data.pass }}%</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</nz-layout>

@@ -1,0 +1,50 @@
+<nz-layout class="window">
+  <div class="in">
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input type="text" nz-input placeholder="题目编号/标题" (keypress)="($event.which===13)?searchProblems():0"
+        [(ngModel)]="search" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+    <button routerLink="/problemadd" nz-button nzType="primary" nzShape="round">
+      <i nz-icon nzType="form" nzTheme="outline"></i>添加题目
+    </button>
+  </div>
+  <nz-table #basicTable [nzData]="listOfData" nzPaginationPosition='both' [nzLoading]="isLoading" [nzPageSize]="50">
+    <thead>
+      <tr>
+        <th class="problemid">题目编号</th>
+        <th class="title">标题</th>
+        <th class="accepted">解决</th>
+        <th class="intime">添加时间</th>
+        <th class="defunct">启用/屏蔽</th>
+        <th class="edit">编辑</th>
+        <th class="delete">删除</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data let i=index">
+        <td class="problemid">
+          <a routerLink="/problem" [queryParams]="{problem_id:data.problem_id}">{{ data.problem_id }}</a></td>
+        <td>{{ data.title }}</td>
+        <td class="accepted">{{data.accepted}}</td>
+        <td class="intime">{{ data.in_date }}</td>
+        <td class="defunct">
+          <nz-switch [ngModel]="data.defunct=='N'" [nzLoading]="data.loading" (click)="setDefunct(i)"></nz-switch>
+        </td>
+        <td class="edit">
+          <button nz-button nzType="primary" nzShape="circle" nzGhost routerLink="/problemedit"
+            [queryParams]="{problem_id:data.problem_id}">
+            <i nz-icon nzType="edit" nzTheme="outline"></i>
+          </button>
+        </td>
+        <td class="delete">
+          <button nz-button nzType="primary" nzShape="circle" nzDanger (click)="showDeleteConfirm(data.problem_id)">
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-layout>

@@ -1,0 +1,121 @@
+.window {
+  background: white;
+
+  .in {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .contestid,
+  .title,
+  .star,
+  .end,
+  .private,
+  .defunct,
+  .edit,
+  .delete {
+    text-align: center;
+  }
+
+  .contestid {
+    width: 10%;
+  }
+
+  .title {
+    width: 30%;
+  }
+
+
+  .star,
+  .end {
+    width: 13%;
+  }
+
+  .private,
+  .defunct {
+    width: 9%;
+  }
+
+  .resetpwd,
+  .delete {
+    width: 8%;
+  }
+}
+
+::ng-deep .ant-pagination-item-active {
+  border-color: #cc00ff !important;
+
+  a {
+    color: #cc00ff;
+
+    &:hover {
+      color: #cc00ff;
+    }
+  }
+}
+
+::ng-deep .ant-pagination-item:hover {
+  border-color: #cc99ff !important;
+
+  a {
+    color: #cc99ff;
+
+    &:hover {
+      color: #cc99ff;
+    }
+  }
+}
+
+::ng-deep .ant-pagination-prev:hover .ant-pagination-item-link {
+  border-color: #cc99ff !important;
+  color: #cc99ff;
+}
+
+::ng-deep .ant-pagination-next:hover .ant-pagination-item-link {
+  border-color: #cc99ff !important;
+  color: #cc99ff;
+}
+
+::ng-deep .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon {
+  color: #cc99ff;
+}
+
+::ng-deep .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
+  color: #cc99ff;
+}
+
+.ant-input-affix-wrapper {
+  height: 40px;
+
+  &:nth-child(1) {
+    width: 250px;
+  }
+
+  &:nth-child(2) {
+    width: 150px;
+  }
+
+  margin-right: 10px;
+
+  &:focus,
+  &:hover {
+    border-color: #cc99ff;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px #ccccff;
+  }
+}
+
+.ant-input-affix-wrapper-focused {
+  border-color: #cc99ff;
+  box-shadow: 0 0 0 2px #ccccff;
+}
+
+::ng-deep .ant-table-pagination-right {
+  justify-content: center;
+}

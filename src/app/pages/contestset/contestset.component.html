@@ -1,0 +1,57 @@
+<nz-layout class="window">
+  <div class="in">
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input [(ngModel)]="searchTitle" (keypress)="$event.which === 13 ? searchByTitle() : 0" type="text" nz-input
+        placeholder="标题" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input [(ngModel)]="searchID" (keypress)="$event.which === 13 ? searchByID() : 0" type="number" nz-input
+        placeholder="比赛编号" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+  </div>
+  <nz-table #basicTable [nzData]="listOfData" [nzLoading]="isLoading" [nzPageSize]="50" nzPaginationPosition="both">
+    <thead>
+      <tr>
+        <th class="status"></th>
+        <th class="contestid">比赛编号</th>
+        <th class="title">标题</th>
+        <th class="time">时间</th>
+        <th class="public">开放</th>
+        <th class="owner">创建人</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td class="status"></td>
+        <td class="contestid">{{ data.contest_id }}</td>
+        <td class="title">
+          <a routerLink="/contest/{{data.contest_id}}">{{ data.title }}</a>
+        </td>
+        <td class="time">
+          <div>
+            <p [style]="'color:' +(data.isEnd ? '#cfcfcf;': data.isStart ? '#ff0000;': '#00cd00;')">
+              {{ data.isEnd ? "已结束" : data.isStart ? "进行中" : "未开始" }} </p>
+            <p>
+              &nbsp;{{ datePipe.transform( data.isStart ? data.end_time : data.start_time, "yyyy-MM-dd HH:mm:ss" ) ?.toString() }}
+            </p>
+            <div *ngIf="data.isStart && !data.isEnd">
+              <p style="color: #ff0000">&nbsp;剩余&nbsp;</p>
+              <nz-countdown [nzValue]="date(data.end_time)" [nzFormat]="'D 天 HH 时 mm 分 ss 秒'">
+              </nz-countdown>
+            </div>
+          </div>
+        </td>
+        <td class="public">
+          <p [style]="'color:' + (data.private ? '#ff0000;' : '#00cd00;')">{{ data.private ? "私有" : "公开" }}</p>
+        </td>
+        <td class="owner">{{ data.user_id }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-layout>

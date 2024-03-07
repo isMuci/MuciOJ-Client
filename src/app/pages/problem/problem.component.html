@@ -1,0 +1,46 @@
+<div class="window">
+  <div class="title">
+    <div>
+      <h1>{{inContest?ID:problem.problem_id}}：{{problem.title}}</h1>
+    </div>
+    <div>
+      <nz-tag [nzColor]="'magenta'">时间限制：{{problem.time_limit*1000}}ms</nz-tag>
+      <nz-tag [nzColor]="'red'">内存限制：{{problem.memory_limit}}MB</nz-tag>
+    </div>
+    <div>
+      <nz-tag [nzColor]="'cyan'">评测方式：{{problem.spj==0?'文本比较':'特殊判断'}}</nz-tag>
+    </div>
+    <div>
+      <nz-tag [nzColor]="'purple'">提交：{{problem.submit}}</nz-tag>
+      <nz-tag [nzColor]="'green'">通过：{{problem.accepted}}</nz-tag>
+    </div>
+  </div>
+  <div class="problem">
+    <div class="op">
+      <button nz-button nzType="primary" routerLink="/submit"
+        [queryParams]="{problem_id: getProblem.problem_id, contest_id: getProblem.contest_id, password: getProblem.password}">提交</button>
+      <button nz-button nzType="default" routerLink="/status"
+        [queryParams]="{problem_id: getProblem.problem_id, contest_id: getProblem.contest_id, password: getProblem.password}">提交记录</button>
+      <button *ngIf="!inContest" nz-button nzType="default" routerLink="/problemstatus"
+        [queryParams]="{problem_id:problem.problem_id}">提交统计</button>
+    </div>
+    <nz-card nzTitle="题目描述" [nzLoading]="isLoading">
+      <div [innerHTML]="problem.description"></div>
+    </nz-card>
+    <nz-card nzTitle="输入格式" [nzLoading]="isLoading">
+      <div [innerHTML]="problem.input"></div>
+    </nz-card>
+    <nz-card nzTitle="输出格式" [nzLoading]="isLoading">
+      <div [innerHTML]="problem.output"></div>
+    </nz-card>
+    <nz-card nzTitle="输入样例" [nzLoading]="isLoading">
+      <div [innerText]="problem.sample_input"></div>
+    </nz-card>
+    <nz-card nzTitle="输出样例" [nzLoading]="isLoading">
+      <div [innerText]="problem.sample_output"></div>
+    </nz-card>
+    <nz-card nzTitle="提示" [nzLoading]="isLoading">
+      <div [innerHTML]="problem.hint"></div>
+    </nz-card>
+  </div>
+</div>

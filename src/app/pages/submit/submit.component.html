@@ -1,0 +1,58 @@
+<div class="window">
+  <div class="laststatus">
+    <nz-card nzTitle="最近十次提交">
+      <nz-table #basicTable [nzData]="listOfData" [nzLoading]="isLoading" [nzPageSize]="50" nzShowPagination="false">
+        <thead>
+          <tr>
+            <th class="submitid">提交编号</th>
+            <th class="userid">用户</th>
+            <th class="nick">昵称</th>
+            <th class="problemid">题目编号</th>
+            <th class="status">结果</th>
+            <th class="memory">内存</th>
+            <th class="time">耗时</th>
+            <th class="language">语言</th>
+            <th class="codelength">代码长度</th>
+            <th class="submittime">提交时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td class="submitid">{{ data.solution_id }}</td>
+            <td class="userid">
+              <a routerLink="/userinfo/{{ data.user_id }}">{{ data.user_id }}</a>
+            </td>
+            <td class="nick">{{ data.nick }}</td>
+            <td class="problemid">
+              <a routerLink="/problem" [queryParams]="{ problem_id: data.problem_id}">{{ data.problem_id }}</a>
+            </td>
+            <td class="status">
+              <nz-spin *ngIf="data.result == 0" nzSimple></nz-spin>
+              <nz-tag *ngIf="data.result != 0" [nzColor]="tag[data.result].color">{{ tag[data.result].text }}</nz-tag>
+            </td>
+            <td class="memory">{{ data.memory }}KB</td>
+            <td class="time">{{ data.time }}ms</td>
+            <td class="language">{{ language[data.language] }}</td>
+            <td class="codelength">{{ data.code_length }}bytes</td>
+            <td class="submittime">{{ datePipe.transform(data.in_date, "yyyy-MM-dd HH:mm:ss")?.toString() }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-card>
+  </div>
+  <div class="submit">
+    <nz-card nzTitle="提交代码">
+      <h2>题目：{{ submit.problem_id }}</h2>
+      <h3>选择代码语言</h3>
+      <nz-select [(ngModel)]="selectedValue" [compareWith]="compareFn" nzAllowClear nzPlaceHolder="选择语言">
+        <nz-option *ngFor="let option of languageList" [nzValue]="option" [nzLabel]="option.label">
+        </nz-option>
+      </nz-select>
+      <h3>代码</h3>
+      <textarea [(ngModel)]="submit.source" rows="4" nz-input></textarea>
+      <div>
+        <button (click)="check()" nz-button nzType="primary">提交</button>
+      </div>
+    </nz-card>
+  </div>
+</div>
